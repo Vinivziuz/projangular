@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt br">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>Teste</title>
+</head>
+
+<body background="img/bg.png">
+    <div class="container">
+        <img src="img/test.png" class="promo" onclick="mostrarTexto('descricoes.txt')">
+        <img src="img/test.png" class="promo" onclick="mostrarTexto('descricoes.txt')">
+        <img src="img/test.png" class="promo" onclick="mostrarTexto('descricoes.txt')">
+        <div class="texto" id="texto"></div>
+    </div>
+
+
+    <script>
+        function mostrarTexto(arquivo) {
+            // Oculta todas as imagens
+            var imagens = document.querySelectorAll('.promo');
+            imagens.forEach(function (promo) {
+                promo.style.display = 'none';
+            });
+
+            fetch(arquivo)
+                .then(response => response.text())
+                .then(texto => {
+                    // Mostra o texto
+                    var textoDiv = document.getElementById('texto');
+                    textoDiv.innerHTML = texto;
+                    textoDiv.style.display = 'flex';
+                })
+                .catch(error => console.error('Erro ao carregar o arquivo:', error));
+        }
+
+    </script>
+</body>
+
+</html>

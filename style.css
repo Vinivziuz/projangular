@@ -1,0 +1,27 @@
+body{
+    background-attachment: scroll;
+    background-size: cover;
+    margin: 2%;
+}
+
+.promo{
+    box-shadow: white;
+    width: 200px;
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    margin: 5px;
+}
+
+.promo:hover{
+    transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.7)
+}
+
+.container{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border: solid 2px black;
+    height: 600px;
+    width: 1000px;
+    padding: 20px;
+}

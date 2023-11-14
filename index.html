@@ -25,16 +25,24 @@
             });
 
             fetch(arquivo)
-                .then(response => response.text())
-                .then(texto => {
-                    // Mostra o texto
-                    var textoDiv = document.getElementById('texto');
-                    textoDiv.innerHTML = texto;
-                    textoDiv.style.display = 'flex';
-                })
-                .catch(error => console.error('Erro ao carregar o arquivo:', error));
-        }
+        .then(response => response.text())
+        .then(textoMarkdown => {
+          // Divide o texto em partes usando o marcador '---'
+          var partes = textoMarkdown.split('---');
+          
+          // Encontra a parte correspondente à imagem clicada
+          var descricao = partes.find(part => part.includes(nomeImagem));
+          
+          // Converte o Markdown para HTML usando marked.js
+          var textoHTML = marked(descricao || '');
 
+          // Mostra o texto convertido
+          var textoDiv = document.getElementById('texto');
+          textoDiv.innerHTML = textoHTML;
+          textoDiv.style.display = 'flex';
+        })
+        .catch(error => console.error('Erro ao carregar o arquivo:', error));
+        }
     </script>
 </body>
 

@@ -23,6 +23,9 @@
       imagens.forEach(function(promo) {
         promo.style.display = 'none';
       });
+        // Coloca o botão voltar
+      var botaoVoltar = document.getElementById('botaoVoltar');
+      botaoVoltar.style.display = 'block';
 
       // Carrega o conteúdo do arquivo
       fetch('descricoes.txt')

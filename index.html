@@ -13,6 +13,7 @@
         <img src="img/test.png" alt="Imagem 1" class="promo" onclick="mostrarTexto('imagem2')">
         <img src="img/test.png" alt="Imagem 1" class="promo" onclick="mostrarTexto('imagem3')">
         <div class="texto" id="texto"></div>
+         <button id="botaoVoltar" onclick="voltar()">Voltar</button>
     </div>
 
  <script>
@@ -45,6 +46,22 @@
           textoDiv.style.display = 'flex';
         })
         .catch(error => console.error('Erro ao carregar o arquivo:', error));
+    }
+
+     function voltar() {
+      // Oculta o texto
+      var textoDiv = document.getElementById('texto');
+      textoDiv.style.display = 'none';
+
+      // Mostra todas as imagens
+      var imagens = document.querySelectorAll('.imagem');
+      imagens.forEach(function(imagem) {
+        imagem.style.display = 'block';
+      });
+
+      // Oculta o botão de voltar
+      var botaoVoltar = document.getElementById('botaoVoltar');
+      botaoVoltar.style.display = 'none';
     }
   </script>
 </body>

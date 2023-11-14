@@ -16,25 +16,20 @@
     </div>
 
  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-        function mostrarTexto(arquivo, nomeImagem) {
-            // Oculta todas as imagens
-            var imagens = document.querySelectorAll('.promo');
-            imagens.forEach(function (promo) {
-                promo.style.display = 'none';
-            });
+  <script>
+    function mostrarTexto(arquivo) {
+      // Oculta todas as imagens
+      var imagens = document.querySelectorAll('.imagem');
+      imagens.forEach(function(imagem) {
+        imagem.style.display = 'none';
+      });
 
-            fetch(arquivo)
+      // Carrega o conteúdo do arquivo Markdown
+      fetch(arquivo)
         .then(response => response.text())
         .then(textoMarkdown => {
-          // Divide o texto em partes usando o marcador '---'
-          var partes = textoMarkdown.split('---');
-          
-          // Encontra a parte correspondente à imagem clicada
-          var descricao = partes.find(part => part.includes(nomeImagem));
-          
           // Converte o Markdown para HTML usando marked.js
-          var textoHTML = marked(descricao || '');
+          var textoHTML = marked(textoMarkdown);
 
           // Mostra o texto convertido
           var textoDiv = document.getElementById('texto');
@@ -42,8 +37,8 @@
           textoDiv.style.display = 'flex';
         })
         .catch(error => console.error('Erro ao carregar o arquivo:', error));
-        }
-    </script>
+    }
+  </script>
 </body>
 
 </html>

@@ -9,31 +9,39 @@
 
 <body background="img/bg.png">
     <div class="container">
-        <img src="img/test.png" alt="Imagem 1" class="promo" onclick="mostrarTexto('descricoes.md', 'Imagem 1')">
-        <img src="img/test.png" alt="Imagem 1" class="promo" onclick="mostrarTexto('descricoes.md', 'Imagem 2')">
-        <img src="img/test.png" alt="Imagem 1" class="promo" onclick="mostrarTexto('descricoes.md', 'Imagem 3')">
+        <img src="img/test.png" alt="Imagem 1" class="promo" onclick="mostrarTexto('imagem1')">
+        <img src="img/test.png" alt="Imagem 1" class="promo" onclick="mostrarTexto('imagem2')">
+        <img src="img/test.png" alt="Imagem 1" class="promo" onclick="mostrarTexto('imagem3')">
         <div class="texto" id="texto"></div>
     </div>
 
- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    function mostrarTexto(arquivo) {
+ <script>
+    function mostrarTexto(imagem) {
       // Oculta todas as imagens
       var imagens = document.querySelectorAll('.imagem');
       imagens.forEach(function(imagem) {
         imagem.style.display = 'none';
       });
 
-      // Carrega o conteúdo do arquivo Markdown
-      fetch(arquivo)
+      // Carrega o conteúdo do arquivo
+      fetch('descricoes.txt')
         .then(response => response.text())
-        .then(textoMarkdown => {
-          // Converte o Markdown para HTML usando marked.js
-          var textoHTML = marked(textoMarkdown);
+        .then(texto => {
+          // Analisa o texto para obter pares imagem:descrição
+          var pares = texto.split('\n');
+          var descricao = '';
 
-          // Mostra o texto convertido
+          // Procura a descrição correspondente à imagem clicada
+          pares.forEach(function(par) {
+            var partes = par.split(':');
+            if (partes[0] === imagem) {
+              descricao = partes[1];
+            }
+          });
+
+          // Mostra a descrição
           var textoDiv = document.getElementById('texto');
-          textoDiv.innerHTML = textoHTML;
+          textoDiv.innerHTML = descricao;
           textoDiv.style.display = 'flex';
         })
         .catch(error => console.error('Erro ao carregar o arquivo:', error));
